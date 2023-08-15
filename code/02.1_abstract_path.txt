@@ -1,0 +1,10 @@
+../data/clean_data/UK/fine_scale/splitdata/1973_1977_abstracts_tokenized.csv
+../data/clean_data/UK/fine_scale/splitdata/1978_1983_abstracts_tokenized.csv
+../data/clean_data/UK/fine_scale/splitdata/1984_1988_abstracts_tokenized.csv
+../data/clean_data/UK/fine_scale/splitdata/1989_1993_abstracts_tokenized.csv
+../data/clean_data/UK/fine_scale/splitdata/1994_1998_abstracts_tokenized.csv
+../data/clean_data/UK/fine_scale/splitdata/1999_2003_abstracts_tokenized.csv
+../data/clean_data/UK/fine_scale/splitdata/2004_2008_abstracts_tokenized.csv
+../data/clean_data/UK/fine_scale/splitdata/2009_2013_abstracts_tokenized.csv
+../data/clean_data/UK/fine_scale/splitdata/2014_2018_abstracts_tokenized.csv
+../data/clean_data/UK/fine_scale/splitdata/2019_2023_abstracts_tokenized.csv
