@@ -1,12 +1,11 @@
 import pandas as pd
 
-# 读取项目元数据文件
+
 df_metadata = pd.read_csv("../data/clean_data/UK/fine_scale/project-metadata.csv")
 
-# 将 StartDate 列转换为日期类型
-df_metadata['StartDate'] = pd.to_datetime(df_metadata['StartDate'], format='%d/%m/%Y')
 
-# 按照年份将数据分割成不同的数据框
+
+df_metadata['StartDate'] = pd.to_datetime(df_metadata['StartDate'], format='%d/%m/%Y')
 years = [2010, 2013, 2016, 2019, 2022]
 file_paths = []
 for i in range(len(years)):
