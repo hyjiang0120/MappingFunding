@@ -14,41 +14,41 @@ importing data with Mallet
 ## 04_calculate_perplexity.sh
 Training and evaluating the Mallet topic model through multiple iterations with different number of topics and random seeds, and save the model state, diagnostic information and evaluation results
 
-### 05-infer-topics.sh
+## 05-infer-topics.sh
 Use the previously trained topic inferencer (inferencer) to perform topic inference on the entire data set (topic inference)
 
-### 06-concat-proj-metadata.py
+## 06-concat-proj-metadata.py
 Organize and process project metadata, including cleansing funding amounts, merging data, calculating project funding totals, filtering top funding projects, and saving processed data
 
 ## 08-parse-key-words.py
 Extracts topic keyword information from an XML file and organizes it into a readable tabular form.
 
-### 11_splitsbatract.py
+## 11_splitsbatract.py
 According to the start date of the project, the corresponding summary information is organized by year and saved in different files
 
-### 12_split_metadata.py
+## 12_split_metadata.py
 Segment metadata into CSV files of different years based on project start date for more efficient data processing and analysis
 
 ## 13_topic_amount.py
 Extract the funding amount from the project metadata, merge it with the topic data, calculate the total funding amount for each topic
 
-### 14_count_project_number.py
+## 14_count_project_number.py
 Extract the most significant theme of each item in each theme from the data file, and count the number of items under each theme
 
-### 15_merge_result.py
+## 15_merge_result.py
 data merge
 
-### 16_graph.py
+## 16_graph.py
 Create a Sunburst Chart base on the data
 
-### 17_column_graph.py
+## 17_column_graph.py
 Use Seaborn to draw a heat map
 
-### 18_count_funding.py
+## 18_count_funding.py
 Extract the corresponding project information and fund data from the metadata file, and add the fund amount to the corresponding column in the DataFrame according to the index of the maximum value
 
-### 19_count_funding_result.py
+## 19_count_funding_result.py
 Read the result file of previously generated funding amounts, calculate the sum of each project funding
 
-### Project Report
+## Project Report
 The latex code for dissertation.
