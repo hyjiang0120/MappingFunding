@@ -2,7 +2,7 @@
 
 This repository contains code and resources for the project "Revealing Temporal Trends in UK STEM Funding using AI". The project aims to uncover and analyze temporal trends in STEM (Science, Technology, Engineering, and Mathematics) funding in the UK. The analysis involves data preprocessing, topic analysis using the Mallet Latent Dirichlet Allocation (LDA) tool, and further analysis of LDA-generated results using Python.
 
-## step 1 01-process-data.sh
+## 01-process-data.sh
 To preprocess the raw text data and convert it into a format suitable for the MALLET topic modeling tool for subsequent topic analysis, which including removing stop words, lemmatization, etc., and finally saving the processed data as a file for topic modeling analysis.
 
 ## 02_filter-tokens.py
