@@ -51,4 +51,4 @@ Extract the corresponding project information and fund data from the metadata fi
 Read the result file of previously generated funding amounts, calculate the sum of each project funding
 
 ## Project Report
-The latex code for dissertation.
+Dissertation
