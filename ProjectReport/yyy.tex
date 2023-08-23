@@ -1,0 +1,219 @@
+\documentclass[12pt,twoside]{report}
+
+\usepackage{titlesec}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Definitions for the title page
+% Edit these to provide the correct information
+% e.g. \newcommand{\reportauthor}{Timothy Kimber}
+
+\newcommand{\reporttitle}{Mapping global STEM funding in Time-Series through machine learning}
+\newcommand{\reportauthor}{Hanyi Jiang}
+\newcommand{\supervisor}{Dr Samraat Pawar}
+\newcommand{\degreetype}{Master of Research}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% load some definitions and default packages
+\input{includes}
+
+% load some macros
+\input{notation}
+
+\date{September 2023}
+
+\begin{document}
+
+% load title page
+\input{titlepage}
+
+
+% page numbering etc.
+\pagenumbering{roman}
+\clearpage{\pagestyle{empty}\cleardoublepage}
+\setcounter{page}{1}
+\pagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+  \textbf{DECLARATION}
+\end{center}
+The data of the whole project was given from Flavia (f.bellotto-trigo18@imperial.ac.uk). The author of the report, Hanyi Jiang, is responsible for data processing. The initial version of the code for this project was derived from Flavia. The author of this report, Hanyi, made certain modifications and additions to the code to fulfill the analysis requirements. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract} %revise later with questions
+
+%This project aims to analyze the evolution of funding areas sponsored by the UK Research and Innovation (UKRI) funding agency using modern machine learning techniques and unveils the following key findings:
+\\
+%1. Some research fields received sustained attention across the analyzed years.~\\
+%2. Some emerging fields have come into the limelight in recent years.\\
+%3. Over time, there was a gradual increase in the diversity of research areas.\\
+%4. Some fields are gradually becoming less popular. For instance, "Particle Physics" was prominent in the early years but gradually decreased in subsequent years.
+
+\end{abstract}
+
+%\cleardoublepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\clearpage{\pagestyle{empty}\cleardoublepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--- table of contents
+\fancyhead[RE,LO]{\sffamily {Table of Contents}}
+\tableofcontents 
+
+
+\clearpage{\pagestyle{empty}\cleardoublepage}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\fancyhead[LE,RO]{\slshape \rightmark}
+\fancyhead[LO,RE]{\slshape \leftmark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+In recent years, humankind has faced a myriad of daunting challenges, including wars and military conflicts, rising sea levels gradually making some cities disappear, pandemics, Noncommunicable diseases, dwindling resources, and so forth, and are also working hard to iterate technology on the basis of human beings to enable progress, causing an acceleration of the rate of change. For example, Generative Adversarial Network (GAN) technology has promoted the further development of artificial intelligence technology. Machines have been able to create fake pictures and videos to confuse human beings. As another example, Biomarker testing was introduced to calculate the probability of a person suffering from cancer in the future. \\
+\\
+
+Amid these evolving landscapes, research remains at the forefront of understanding and addressing complex problems. The foundation of any successful research project relies on innovative ideas and meticulous execution.\cite{neema2021research} Conducting research, especially in fields like wet laboratory science or large-scale epidemiological studies, demands substantial funding to cover tangible and intangible costs.\cite{schembri2018wasp} Therefore, even though the process of applying for funding is by no means an easy task and is considerably daunting and time-consuming, with EU research programs, for example, EU research (such as Horizon 2020), application success rates are only around 15\%,\cite{schembri2018wasp}, researchers generally opt to seek research funding to ensure the smooth operation of their research projects. Encouragingly, governments, universities, and nonprofit organizations recognize the pivotal role of research and development (R\&D) in driving economic growth, job creation, national security, environmental protection, and knowledge expansion.\cite{sargent2017global} \\
+
+In 2020, global R\&D expenditures reached \$2.352 trillion. The 10 largest R\&D-funding countries of 2020 accounted for \$1.999 trillion in R\&D expenditures.\cite{sargent2017global} Such substantial investments highlight the commitment to foster research and innovation. As research projects continue to tackle critical challenges and advance human knowledge, securing adequate funding is crucial to fueling the relentless pursuit of scientific breakthroughs. For instance, Gush, Jason's findings indicate that funding is correlated with a 6-15\% increase in publications and a 22-26\% increase in citation-weighted papers for research teams.\cite{gush2018effect}
+
+
+\section*{The UK Research and Development Landscape}
+In 2021, The UK government’s net expenditure on research and development (R\&D), excluding EU contributions, remained at \pounds14.0 billion. Within the UK, research funding takes two primary forms: commercial and non-commercial, with the latter dominating the landscape. Non-commercial funding sources encompass research charities, national academies, various government departments, and the United Kingdom Research and Innovation (UKRI).\\
+~\\
+Among these organizations, UKRI is UK's most significant public funder of research and innovation, who principally funded through the Science Budget by the Department for Business, Energy and Industrial Strategy (BEIS). According to UKRI Annual Report and Accounts 2021-22, they invest more than £8 billion annually to advance our understanding of people and the world around us and deliver benefits for society, the economy, and the environment. 
+
+
+
+\section*{Project Scope: Mapping Global Funding Using AI}
+The primary objective of this research is to map the global funding landscape and monitor the evolving trends in research investment and focus areas over time. The analysis of funding allocation patterns will allow us to gain invaluable insights into the dynamic nature of research funding priorities and the emergence of novel research areas. 
+
+\section*{Key Themes and Objectives}
+Notably, we seek to address the following key research questions:
+
+\begin{enumerate}
+  \item Evolution of Research Funding Priorities: How have research funding priorities evolved across different disciplines and industries over the years? 
+  \item Emerging Research Areas: What emerging research areas have gained prominence in recent times, and how do they align with societal needs and technological advancements?
+  \item Drivers of Fluctuations: What are the driving factors behind fluctuations in research attention to specific themes in different time periods?
+ 
+\end{enumerate}
+
+To achieve this, I will harness AI-driven approaches to process and visualize the data, unveiling patterns and relationships between funding allocation and key temporal factors. Tracking and understanding changes in research investment will enable us to address contemporary challenges effectively and adapt research strategies for future endeavors.\\
+
+The understanding of research funding trends carries immense significance for researchers, policymakers, and funding agencies. By unraveling the ever-changing landscape of research investment, we can identify shifts in research priorities and potential areas of innovation. Such insights will empower us to address contemporary challenges effectively and adapt research strategies for future endeavors.\\
+
+In total, this study endeavors to reveal dynamic trends in research funding over time. By employing AI-driven methods and data analytics techniques, we hope to pave the way for transformative societal impacts and groundbreaking discoveries. The use of AI to analyze global funding allocations is not only a testament to the ongoing quest for knowledge, but also a way to shape a brighter, more resilient future.\\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Methods}
+Our primary objective revolved around an extensive dataset encompassing funded projects by UKRI throughout the UK, comprising crucial information such as project titles, abstracts, and corresponding funding amounts. Armed with these comprehensive data, I employed topic analysis methods to ascertain the distinct research domains to which they pertained. This analytical endeavor was intended to shed light on the evolving landscape of research focus across various disciplines, revealing prominent areas that have garnered substantial support from UKRI-funded programs over the past few decades.By scrutinizing the ever-evolving patterns and dominant themes, I gained valuable insights into the investment preferences and strategic directions pursued by research funding agencies, particularly UKRI. \\
+
+\section*{Data Preprocessing}
+The available data for analysis consists of UKRI records spanning from 1973 to 2023. The minimum data requirement includes project titles, start dates, titles, abstracts, funding amounts, and all other available project-specific metadata. \\
+
+During the data preprocessing stage, I made various attempts to guarantee the efficiency of information filtering and subject analysis in the subsequent phases. To begin with, I grouped all the available data from 1973 into five-year intervals. Each group consisted of two parts: the title summary, comprising project summaries and project IDs, and the metadata part, encompassing all other project-related details.\\
+
+However, upon completing the grouping, I encountered an issue with the datasets for 1973-1977, 1978-1983, 1984-1988, and 1989-1993. These groups had very limited data, with the number of projects being less than 100, which rendered them less valuable for meaningful research. Similarly, the number of projects in the 1999-2003 period did not exceed 1,000. Considering that the actual number of funded projects may be substantially higher than those reflected in the data, I discard data before 2004 and focus solely on projects from 2004 to 2023.\\
+
+Under such circumstances, to enhance analysis accuracy, I further reduced the time interval and regrouped the data every three years. This adjustment would yield more informative and comprehensive datasets for in-depth subject analysis and allow for a more robust examination of trends and research preferences in recent years.\\
+
+After grouping the data, I started to formally process the data file. I have implemented the following to remove noise in the dataset.
+
+\begin{enumerate}
+  \item Tokenization: Breaking down raw text into individual words
+  \item Removing punctuation and stop words*
+  \item Lemmatization: remove inflectional endings only and to return the base or dictionary form of a word.\cite{kurt2020topic}
+  \item Remove incomplete projects from the dataset to ensure data quality and reliability.
+  \item Removes words that appear less than 20 times
+  \item Removes words that appear in 80\% of the documents
+\end{enumerate}
+
+*Stop words are common words that are frequently used in natural language, but usually lack practical meaning or have no significant impact on text analysis tasks. Since these words do not carry specific semantic information in most cases, they are often ignored or removed from the text in tasks to reduce data dimensions, improve processing efficiency, and help focus on meaningful keywords or phrases.\cite{rajaraman2011mining}
+
+\section*{Preparing Topic Numbers for Mallet LDA}
+
+The current challenge lies in the abundance of unstructured abstracts  in the dataset, making extracting relevant and necessary information difficult. To address this, I opted for topic modeling techniques from the field of text mining. \\
+
+Topic modeling is a valuable tool in statistics and natural language processing, employing a statistical model to unveil abstract "topics" present in a collection of documents. This powerful text-mining approach enables the discovery of hidden semantic structures within the text, offering valuable insights into the underlying themes and concepts present in the analyzed documents.\cite{arun2010finding} To be more specific, a topic model is a probabilistic model used to discover topics, or latent structures, across a collection of documents.\cite{saxton2018gentle} There are many approaches for obtaining topics from a text, such as – Term Frequency and Inverse Document Frequency. In fact, topic modeling encompasses various techniques, including four of the most popular approaches: LDA, Mallet LDA, STM, and HDP. \cite{egger2022topic}\\
+
+Latent Dirichlet Allocation (LDA), an unsupervised machine learning approach, was proposed by Blei, David M., Ng, Andrew Y., and Jordan in 2003, which is a powerful algorithm that enables exploring and discovering latent topics within extensive collections of text known as corpora.\cite{chipidza2022topic} LDA can infer the topic of each document in the form of probability distribution, so that after analyzing some documents to extract their topic distribution, topic clustering or text classification can be performed according to the topic distribution. \cite{blei2012probabilistic}\\ In LDA (Latent Dirichlet Allocation), the Bag-of-Words model is employed, commonly known as the "bag-of-words" model. In this model, each document is represented as a collection of words, disregarding their order of appearance. \\
+
+Mallet LDA and LDA are highly correlated. The MALLET topic modeling toolkit contains efficient, sampling-based implementations of Latent Dirichlet Allocation, Pachinko Allocation, and Hierarchical LDA. \cite{mallet} According to the experiences of Senol Kurt and the authors of the Gensim tutorial, utilizing the MALLET package (with Python wrapper) to implement the LDA approach for topic generation has been found to produce superior results.\cite{kurt2020topic} Hence, I have decided to adopt the Mallet LDA approach for my project.\\
+
+To determine the number of topics for the Mallet LDA model, I employed the \texttt{mallet evaluate-topics} command to analyze the model's performance across a range of topic numbers, from 50 to 400 with intervals of 50. I used perplexity as the evaluation criterion. Perplexity measures the model's ability to predict unseen test data, normalized by the number of words in the evaluation. The perplexity formula is defined as follows:
+\begin{equation}
+PP(W) = \left( P(W_1W_2, \ldots, W_m)^{-\frac{1}{m}} \right)
+\end{equation}
+
+where $PP$ represents perplexity, $W$ refers to the words in the document, and $P$ denotes the probability estimate assigned to the document words. An LDA model with a specific number of topics that yields the minimum perplexity value is considered the optimal model.\cite{neishabouri2020reliability} \\
+
+Afterwards, I utilized the "mallet run cc.mallet.util.DocumentLengths" command to calculate the lengths of documents in the test set and saved the results to a file. Following this, I implemented a loop to iterate through different numbers of topics, ranging from 50 to 400 with increments of 25. For each topic number, I utilized the "mallet train-topics" command to train the topic model, resulting in the generation of three files: the diagnostic file, the inferencer file, and the topics-state.gz file. The inferencer file contains the necessary parameters for inferring topics in new documents, while the topics-state.gz file includes the training data along with all the inferred parameters, which leads to the fact that the inferencer file is much smaller than the topics-state.gz file.\\
+
+On the other hand, the diagnostic files contain essential information under each topic number, such as the topic ID and relevant statistical metrics, including word count, probability, cumulative probability, document count, word length, coherence, and more. Among them, the coherence metric measures the semantic similarity between high-scoring words in a topic, providing insights into the quality and coherence of the generated topics.\cite{kapadia2022evaluate}\\
+
+Perplexity is one of the most widely used evaluation metrics for language models. Hence, I leveraged the "mallet evaluate-topics" command to assess the performance of the model on the test set and derive its perplexity value. In essence, perplexity focuses on the log-likelihood aspect, providing an indication of how probable new unseen data is when considering the model that was previously learned. In other words, it measures how effectively the model captures the statistics of the held-out data.\cite{kapadia2022evaluate} A lower perplexity value indicates a higher level of coherence and a better-performing model in representing the underlying patterns of the unseen data.\cite{neishabouri2020reliability}\\
+
+After conducting the evaluation, I found that the model with 50 topics achieved the lowest perplexity value of -2.277E7. Therefore, I determined that setting the number of topics to 50 for the subsequent topic inferring process would be the most suitable choice.\\
+
+\section*{Topic Modeling Using Mallet LDA}
+Once the number of topics is determined, which is 50, the process of topic inference begins with the "mallet infer-topics" command. This command utilizes the previously trained inferencer file as input and generates the topic distribution table. In this table, each row corresponds to a project abstract, and each column represents a topic, with the values indicating the degree of association between each abstracts and the different topics. This table effectively illustrates the level of association between each abstracts and the various topics, facilitating subsequent topic analysis and text comprehension.\\
+
+In the penultimate step, I used xml.etree.ElementTree to parse the diagnostic information from the XML file generated by Mallet, which contained details about the 50-topic model, allowing me to obtain the specific vocabulary associated with each topic.\\
+
+Finally, I leveraged the power of ChatGPT to gain deeper insights and understanding from the topic-related words obtained in the previous steps. By reading and parsing the XML file containing the diagnostic information of the Mallet-generated topic model with 50 topics, I extracted the specific vocabulary associated with each topic.\\
+
+With the integration of these topic-related words into ChatGPT, I harnessed its capabilities to derive precise directions and valuable insights based on the given topic words. This fusion of Mallet LDA and ChatGPT enabled me to effectively explore and comprehend the underlying themes and concepts that were concealed within the extensive collection of abstracts.\\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Results}
+Through the analysis and consolidation of each triennial topic, I have made four significant findings. 
+\begin{enumerate}
+
+
+  \item Sustained Importance: The topics of Medicine, Environmental Science, Climate Science, Data Science, Technology, Engineering, Computer Science, and Materials Science have exhibited a consistent presence throughout various time periods, underscoring their enduring significance and impact.
+
+  \item Emerging Fields: In recent years, several emerging fields have garnered attention, including Quantum Physics, Machine Learning, Robotics, Video Games, and Carbon Capture. These emerging trends signify the exploration of novel research directions and the application of cutting-edge technologies.
+
+  \item Environment and Sustainable Development: The recurring appearance of Environmental Science, Climate Science, Sustainable Energy, Waste Management, and Marine Science as popular topics highlights the ongoing commitment to environmental protection and sustainable development challenges.
+
+  \item Data Science and Computer Science: The recurrent prominence of Data Science, Computer Science, and Machine Learning across different time frames emphasizes the pivotal role of data analysis and computational capabilities in diverse disciplines and applications.
+
+  \item Medicine and Life Sciences: The consistent presence of topics such as Medicine, Biochemistry, Neuroscience, Genetics, Immunology, and other life sciences demonstrates a continual focus on advancements in health and medical research.
+
+  \item Lastly, certain topics experienced fluctuations in attention across different years. For instance, "Particle Physics" was prominent in earlier years but waned in later years. Conversely, the "Medicine" topic consistently maintained its significance over multiple years.\\
+
+  
+\end{enumerate}
+Apart from observing the overall funding trends over the span of 20 years, there are intrinsic connections among the projects funded within each smaller time interval. Taking the example of 2010-2012, the funded projects can be primarily categorized into four major disciplines: Engineering and Technology, Medical and Health Sciences, Natural Sciences, and Interdisciplinary Studies. Notably, the interdisciplinary themes, such as Human-Computer Interaction, Policy Development, Education and Training, and Problem Solving, transcend multiple disciplinary boundaries, reflecting a convergence of diverse fields.\\
+
+This analysis reveals that the funded research during this three-year period encompasses a wide range of disciplines, with a focus on cutting-edge research directions across various fields. The presence of interdisciplinary projects underscores the growing importance of collaborative efforts to address complex challenges that require insights from multiple domains. The funding landscape encourages cross-disciplinary investigations, fostering innovation and breakthroughs at the intersections of traditional academic disciplines.\\
+
+\begin{center}
+    \includegraphics[width=0.7\textwidth]{figures/2010_2012_donut_chart.png}
+    \captionof{figure}{Interdisciplinary Mapping of Disciplines and Subdisciplines for 2010-2012}
+    \label{fig:donut_chart}
+\end{center}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Discussion}
+
+
+%% bibliography
+\bibliography{bibliography} 
+\bibliographystyle{apa}
+
+
+\end{document}

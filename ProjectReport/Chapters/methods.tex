@@ -1,0 +1,64 @@
+\chapter{Methods}
+\lettrine[lines=1]{M}{y}
+primary objective based on an extensive dataset encompassing funded projects by UKRI throughout the UK, comprising crucial information such as project titles, abstracts, and corresponding funding amounts. Armed with these comprehensive data, I employed topic analysis methods to ascertain the distinct research domains to which they pertained. This analytical endeavor was intended to discover the evolving landscape of research focus across various disciplines, revealing prominent areas that have garnered substantial support from UKRI-funded programs over the past few decades. By scrutinizing the ever-evolving patterns and dominant themes, I aimed to gain valuable insights into the investment preferences and strategic directions pursued by research funding agencies, particularly UKRI. \\
+
+\section*{Data Preprocessing and Preparation}
+The available data for analysis consists of UKRI records spanning from 1973 to 2023. The minimum data requirement includes project titles, start dates, titles, abstracts, funding amounts, and all other available project-specific metadata. \\
+
+During the data preprocessing stage, I made various attempts to guarantee the efficiency of information filtering and subject analysis in the subsequent phases. To begin with, I grouped all the available data from 1973 into five-year intervals. Each group consisted of two parts: the title summary, comprising project summaries and project IDs, and the metadata part, encompassing all other project-related details.\\
+
+However, upon completing the grouping, I encountered an issue with the datasets for 1973-1977, 1978-1983, 1984-1988, and 1989-1993. These groups had very limited data, with the number of projects being less than 100, which rendered them less valuable for meaningful research. Similarly, the number of projects in 1999-2003 did not exceed 1,000. Considering that the actual number of funded projects may be substantially higher than those reflected in the data, I discard data before 2004 and focus solely on projects from 2004 to 2023.\\
+
+Under such circumstances, to enhance analysis accuracy, I further reduced the time interval and regrouped the data every three years. This adjustment would yield more informative and comprehensive datasets for in-depth subject analysis and allow for a more robust examination of trends and research preferences in recent years.\\
+
+After grouping the data, I started to process the data file formally. I have implemented the following to remove noise in the dataset.
+
+\begin{enumerate}
+  \item Tokenization: Breaking down raw text into individual words
+  \item Removing punctuation and stop words*
+  \item Lemmatization: remove inflectional endings only and return the base or dictionary form of a word \citep{kurt2020topic}.
+  \item Remove incomplete projects from the dataset to ensure data quality and reliability.
+  \item Removes words that appear less than 20 times
+  \item Removes words that appear in 80\% of the documents
+\end{enumerate}
+
+*Stop words are common words frequently used in natural language but usually lack practical meaning or have no significant impact on text analysis tasks. Since these words do not usually carry specific semantic information, they are often ignored or removed from the text in tasks to reduce data dimensions, improve processing efficiency, and help focus on meaningful keywords or phrases \citep{rajaraman2011mining}.
+
+\section*{Preparing Topic Numbers for Mallet LDA}
+
+The current challenge lies in the abundance of unstructured abstracts  in the dataset, making extracting relevant and necessary information difficult. To address this, I opted for topic modeling techniques from the field of text mining. \\
+
+Topic modeling is a valuable tool in statistics and natural language processing, employing a statistical model to unveil abstract "topics" in a collection of documents. This powerful text-mining approach enables the discovery of hidden semantic structures within the text, offering valuable insights into the underlying themes and concepts in the analyzed documents \citep{arun2010finding}. To be more specific, a topic model is a probabilistic model used to discover topics, or latent structures, across a collection of documents \citep{saxton2018gentle}. There are many approaches for obtaining topics from a text, such as – Term Frequency and Inverse Document Frequency. Topic modeling encompasses various techniques, including four of the most popular approaches: LDA, Mallet LDA, STM, and HDP \citep{egger2022topic}.\\
+
+Latent Dirichlet Allocation (LDA), an unsupervised machine learning approach, was proposed by Blei, David M., Ng, Andrew Y., and Jordan in 2003, which is a powerful algorithm that enables exploring and discovering latent topics within extensive collections of text known as corpora \citep{chipidza2022topic}. LDA can infer the topic of each document in the form of probability distribution, so that after analyzing some documents to extract their topic distribution, topic clustering or text classification can be performed according to the topic distribution \citep{blei2012probabilistic}.In LDA (Latent Dirichlet Allocation), the Bag-of-Words model is employed, commonly known as the "bag-of-words" model. In this model, each document is represented as a collection of words, disregarding their order of appearance. \\
+
+Mallet LDA and LDA are highly correlated. The MALLET topic modeling toolkit contains efficient, sampling-based implementations of Latent Dirichlet Allocation, Pachinko Allocation, and Hierarchical LDA \citep{mallet}. According to the experiences of Senol Kurt and the authors of the Gensim tutorial, utilizing the MALLET package (with Python wrapper) to implement the LDA approach for topic generation has been found to produce superior results \citep{kurt2020topic}. Hence, I have adopted the Mallet LDA approach for my project.\\
+
+To determine the number of topics for the Mallet LDA model, I employed the \texttt{mallet evaluate-topics} command to analyze the model's performance across a range of topic numbers, from 50 to 400, with intervals of 50. I used perplexity as the evaluation criterion. Perplexity measures the model's ability to predict unseen test data, normalized by the number of words in the evaluation. The perplexity formula is defined as follows:
+\begin{equation}
+PP(W) = \left( P(W_1W_2, \ldots, W_m)^{-\frac{1}{m}} \right)
+\end{equation}
+
+where $PP$ represents perplexity, $W$ refers to the words in the document, and $P$ denotes the probability estimate assigned to the document words. An LDA model with a specific number of topics that yields the minimum perplexity value is considered the optimal model \citep{neishabouri2020reliability}. \\
+
+Afterward, I utilized the "mallet run cc.mallet.util.DocumentLengths" command to calculate the lengths of documents in the test set and saved the results to a file. Following this, I implemented a loop to iterate through different numbers of topics, ranging from 50 to 400 with increments of 25. For each topic number, I utilized the "mallet train-topics" command to train the topic model, generating three files: the diagnostic file, the inferencer file, and the topics-state.gz file. The inferencer file contains the necessary parameters for inferring topics in new documents, while the topics-state.gz file includes the training data along with all the inferred parameters, which leads to the fact that the inferencer file is much smaller than the topics-state.gz file.\\
+
+On the other hand, the diagnostic files contain essential information under each topic number, such as the topic ID and relevant statistical metrics, including word count, probability, cumulative probability, document count, word length, coherence, and more. Among them, the coherence metric measures the semantic similarity between high-scoring words in a topic, providing insights into the quality and coherence of the generated topics \citep{kapadia2022evaluate}.\\
+
+Perplexity is one of the most widely used evaluation metrics for language models. Hence, I leveraged the "mallet evaluate-topics" command to assess the performance of the model on the test set and derive its perplexity value. In essence, perplexity focuses on the log-likelihood aspect, providing an indication of how probable new unseen data is when considering the model that was previously learned. In other words, it measures how effectively the model captures the statistics of the held-out data \citep{kapadia2022evaluate}. A lower perplexity value indicates a higher level of coherence and a better-performing model in representing the underlying patterns of the unseen data \citep{neishabouri2020reliability}.\\
+
+After the evaluation, I found that the model with 50 topics achieved the lowest perplexity value of -2.277E7. Therefore, I determined that setting the number of topics to 50 for the subsequent topic inferring process would be the most suitable choice.\\
+
+\section*{Topic Modeling Using Mallet LDA}
+Once the number of topics is determined, which is 50, the process of topic inference begins with the "mallet infer-topics" command. This command utilizes the previously trained inferencer file as input and generates the topic distribution table. In this table, each row corresponds to a project abstract, and each column represents a topic, with the values indicating the degree of association between each abstract and the different topics. This table effectively illustrates the association level between each abstract and the various topics, facilitating subsequent topic analysis and text comprehension.\\
+
+Next, I used xml.etree.ElementTree to parse the diagnostic information from the XML file generated by Mallet, which contained details about the 50-topic model, allowing me to obtain the specific vocabulary associated with each topic.\\
+
+In the penultimate step, I leveraged the power of ChatGPT to gain deeper insights and understanding from the topic-related words obtained in the previous steps. By reading and parsing the XML file containing the diagnostic information of the Mallet-generated topic model with 50 topics, I extracted the specific vocabulary associated with each topic.\\
+
+With integrating these topic-related words into ChatGPT, I harnessed its capabilities to derive precise directions and valuable insights based on the given topic words. This fusion of Mallet LDA and ChatGPT enabled me to effectively explore and comprehend the underlying themes and concepts concealed within the extensive collection of abstracts.\\
+
+\section*{Topic Analysis and Funding Trends Evaluation}
+As a final step, I comprehensively evaluated the topic distribution table. Each row in the file represents a distinct project, with the subsequent 50 columns containing probabilities associated with different topics. By employing Python's Pandas package, I meticulously analyzed the data on the dominant topic for each project based on the highest probability. Additionally, I derived insights into the distribution of projects across various topics and compiled an overview of the cumulative funding received by projects associated with each topic. This approach provided valuable insights into the thematic landscape and funding trends within the dataset.
+
+
